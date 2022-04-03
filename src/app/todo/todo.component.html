@@ -1,0 +1,12 @@
+<h1>Todos</h1>
+
+<ul>
+  <li *ngFor="let project of todos">
+    <h3>{{ project.title }}</h3>
+    <ul>
+      <li *ngFor="let todo of project.todos">
+        {{ todo.text }}
+      </li>
+    </ul>
+  </li>
+</ul>
