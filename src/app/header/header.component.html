@@ -1,3 +1,16 @@
 <mat-toolbar color="primary">
-  <span>My Application</span>
+  <div>
+    <span class="example-spacer"></span>
+  </div>
+
+  <div>
+    <span>Задачи</span>
+  </div>
+
+  <div>
+  <button mat-icon-button
+          (click)="handleClick.emit()">
+    <mat-icon>add</mat-icon>
+  </button>
+</div>
 </mat-toolbar>

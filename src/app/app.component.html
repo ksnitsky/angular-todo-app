@@ -1,5 +1,12 @@
 <div>
-  <app-header></app-header>
+  <app-header
+    (handleClick)="openDialog()"
+  ></app-header>
 
-  <app-todo></app-todo>
+  <app-todo
+    *ngFor="let project of data"
+    [title]="project.title"
+    [todos]="project.todos"
+  >
+  </app-todo>
 </div>
