@@ -4,8 +4,33 @@
   align-items: flex-start;
 }
 
+.newTodo {
+  width: 100%; 
+}
+
+.newTodo__title {
+  text-align: center;
+}
+
+.mat-dialog-title {
+  margin-bottom: 1rem;
+}
+
 form {
   display: flex;
   flex-direction: column;
-  align-items: flex-start;
+
+  margin-top: 1rem;
+  width: 100%;
+}
+
+.mat-dialog-actions {
+  display: flex;
+  width: 100%;
+  padding: 0 0 1rem;
+}
+
+.mat-dialog-actions button {
+  flex: 1 1 auto;
+  max-width: 50%;
 }

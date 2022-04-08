@@ -2,7 +2,8 @@ import { NgModule } from '@angular/core';
 import { BrowserModule } from '@angular/platform-browser';
 import { ReactiveFormsModule } from '@angular/forms';
 import { BrowserAnimationsModule } from '@angular/platform-browser/animations';
-import 'reflect-metadata';
+import { HttpClientModule } from '@angular/common/http';
+// import { Ref } from 'reflect-metadata';
 
 import { AngularMaterialModule } from '../app/material.module';
 
@@ -20,6 +21,7 @@ import { NewTodoComponent } from './new-todo/new-todo.component';
   ],
   imports: [
     BrowserModule,
+    HttpClientModule,
     BrowserAnimationsModule,
     ReactiveFormsModule,
     AngularMaterialModule,

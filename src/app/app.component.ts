@@ -1,4 +1,5 @@
-import { environment } from './../environments/environment';
+import { SnackBarService } from './services/snack-bar.service';
+import { ApiService } from './services/api.service';
 import { Component, OnInit } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NewTodoComponent } from './new-todo/new-todo.component';
@@ -10,34 +11,40 @@ import { NewTodoComponent } from './new-todo/new-todo.component';
 })
 export class AppComponent implements OnInit {
 
-  data: Array<any> = []
-  newTodo: object = {
-    text: String,
-    project_title: String
-  }
-
   constructor(
-    public dialog: MatDialog,
+    private api: ApiService,
+    private dialog: MatDialog,
+    private snackBar: SnackBarService,
   ) { }
 
-  async getData() {
-    const res = await fetch(environment.apiUrl)
-    const data = await res.json()
-    this.data = await data
+  data: Array<any> = []
+
+  getData(): void {
+    this.api.getTodos().subscribe({
+      next: (res) => {
+        this.data = res
+      },
+      error: () => {
+        this.snackBar.displayMessage('Список задач не был получен.')
+      }
+    })
   }
 
   openDialog(): void {
     let categories: string[] = [];
-    (this.data.forEach(element => categories.push(element.title)))
+    this.data.forEach(element => categories.push(element.title))
     const dialogRef = this.dialog.open(NewTodoComponent, {
+      width: '375px',
       data: {
         categories: categories,
-        newTodo: this.newTodo
       }
     })
 
     dialogRef.afterClosed().subscribe(result => {
-      console.log(result, ' app.component')
+      if (result) {
+        this.snackBar.displayMessage(result.message)
+        this.getData()
+      }
     })
   }
 

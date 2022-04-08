@@ -1,30 +1,48 @@
-<h3 mat-dialog-title>
-  Новая задача
-</h3>
+<div class="newTodo">
+  <div class="newTodo__title">
+    <h3 mat-dialog-title>
+      Новая задача
+    </h3>
+  </div>
+  <mat-divider>
+  </mat-divider>
+  <mat-dialog-content>
+    <form [formGroup]="newTodoForm">
+      <mat-form-field appearance="outline">
+        <mat-label>Название задачи...</mat-label>
+        <input matInput formControlName="todo_text" />
+      </mat-form-field>
 
-<mat-dialog-content>
-  <form [formGroup]="newTodo" >
-    <mat-form-field appearance="outline">
-      <mat-label>Название задачи...</mat-label>
-      <input matInput formControlName="text" />
-    </mat-form-field>
+      <mat-form-field appearance="outline">
+        <mat-label>Категория</mat-label>
+        <mat-select name="todo" formControlName="project_title">
+          <mat-option (onSelectionChange)="newCategory = !newCategory" value="">
+            Новая Категория
+          </mat-option>
+          <mat-option *ngFor="let title of data.categories" [value]="title">
+            {{ title }}
+          </mat-option>
+        </mat-select>
+      </mat-form-field>
 
-    <mat-form-field appearance="outline">
-      <mat-label>Категория</mat-label>
-      <mat-select name="todo" formControlName="project_title">
-        <mat-option *ngFor="let title of data.categories" [value]="title">
-          {{ title }}
-        </mat-option>
-      </mat-select>
-    </mat-form-field>
-    <mat-form-field appearance="outline" *ngIf="">
+      <mat-form-field appearance="outline"
+                      *ngIf="newCategory"
+      >
+        <mat-label>Название категории</mat-label>
+        <input matInput formControlName="project_title" />
+      </mat-form-field>
+    </form>
+  </mat-dialog-content>
+  <div mat-dialog-actions>
+    <button mat-stroked-button mat-dialog-close>
+      Отмена
+    </button>
 
-    </mat-form-field>
-  </form>
-</mat-dialog-content>
-<div mat-dialog-actions>
-  <button mat-button mat-dialog-close>Отмена</button>
-  <button mat-button (click)="sendData()">
-    Ок
-  </button>
+    <button mat-flat-button 
+            color="primary"
+            (click)="sendData()"
+    >
+      Ок
+    </button>
+  </div>
 </div>

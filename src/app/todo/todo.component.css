@@ -1,5 +1,10 @@
 ul {
   list-style: none;
+  padding: 0;
+}
+
+li {
+  margin-top: 1rem;
 }
 
 mat-checkbox:checked {
@@ -8,4 +13,5 @@ mat-checkbox:checked {
 
 mat-card {
   margin-bottom: 20px;
+  width: 375px;
 }

@@ -1,4 +1,5 @@
 import { Component, Input, OnInit } from '@angular/core';
+import { ApiService } from '../services/api.service';
 
 @Component({
   selector: 'app-todo',
@@ -7,10 +8,23 @@ import { Component, Input, OnInit } from '@angular/core';
 })
 export class TodoComponent implements OnInit {
 
-  @Input('title') title = ''
-  @Input('todos') todos = []
+  constructor(private api: ApiService) { }
 
-  constructor() { }
+  @Input('project') project: any
+
+  changeStatus(todo: any, projectId: number) {
+    this.api.patchTodo({ todoId: todo.id, projectId })
+      .subscribe({
+        next: (res) => {
+          console.log(todo)
+          console.log(res)
+          
+        },
+        error: (res) => {
+          console.log(res)
+        }
+      })
+  }
 
   ngOnInit(): void {
   }

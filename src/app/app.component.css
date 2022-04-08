@@ -1,0 +1,7 @@
+main {
+  display: flex;
+  flex-wrap: wrap;
+  justify-content: space-around;
+  justify-items: flex-start;
+  padding: 40px;
+}
