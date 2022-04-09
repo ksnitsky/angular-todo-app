@@ -9,12 +9,12 @@ export class ApiService {
 
   constructor(private http: HttpClient) { }
 
-  postTodo(data: any) {
-    return this.http.post<any>(`${environment.apiUrl}/todos`, data)
-  }
-
   getTodos() {
     return this.http.get<any>(`${environment.apiUrl}/projects`)
+  }
+
+  postTodo(data: any) {
+    return this.http.post<any>(`${environment.apiUrl}/todos`, data)
   }
 
   patchTodo(data: any) {

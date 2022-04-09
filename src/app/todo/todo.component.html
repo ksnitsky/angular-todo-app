@@ -4,16 +4,17 @@
       {{ project.title }}
     </mat-card-title>
   </mat-card-header>
-  <mat-divider></mat-divider>
+  <mat-divider>
+  </mat-divider>
   <mat-card-content>
     <mat-selection-list>
       <mat-list-option 
         checkboxPosition="before"
         *ngFor="let todo of project.todos"
-        (selectedChange)="changeStatus(todo, project.id)"
+        (click)="state.changeTodoStatus(todo, project.id)"
+        [selected]="todo.isCompleted"
       >
         {{ todo.text }}
-        {{ todo.isCompleted }}
       </mat-list-option>
     </mat-selection-list>
   </mat-card-content>
