@@ -8,13 +8,14 @@
   </mat-divider>
   <mat-card-content>
     <mat-selection-list color="primary">
-      <mat-list-option 
+      <mat-list-option
         checkboxPosition="before"
         *ngFor="let todo of project.todos"
         (click)="state.changeTodoStatus(todo, project.id)"
         [selected]="todo.isCompleted"
+        [style]="todo.isCompleted ? 'text-decoration: line-through' : ''"
       >
-        {{ todo.text }}
+      {{ todo.text }}
       </mat-list-option>
     </mat-selection-list>
   </mat-card-content>

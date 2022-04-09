@@ -2,3 +2,12 @@ mat-card {
   margin-bottom: 20px;
   width: 375px;
 }
+
+.mat-list-item:focus {
+  background: none;
+}
+
+/* .mat-list-text {
+  margin: 40px;
+  text-decoration: line-through;
+} */
