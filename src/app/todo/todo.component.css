@@ -6,8 +6,4 @@ mat-card {
 .mat-list-item:focus {
   background: none;
 }
-
-/* .mat-list-text {
-  margin: 40px;
-  text-decoration: line-through;
-} */
+ 

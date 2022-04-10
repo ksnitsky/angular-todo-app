@@ -16,14 +16,6 @@ export class AppComponent {
   ) { }
 
   openDialog(): void {
-    let categories: string[] = []
-
-    this.state.data.map(element => categories.push(element.title))
-    this.dialog.open(NewTodoComponent, {
-      width: '375px',
-      data: {
-        categories: categories,
-      }
-    })
+    this.dialog.open(NewTodoComponent, { width: '375px' })
   }
 }

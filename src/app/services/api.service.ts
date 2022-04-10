@@ -17,9 +17,9 @@ export class ApiService {
     return this.http.post<any>(`${environment.apiUrl}/todos`, data)
   }
 
-  patchTodo(data: any) {
+  patchTodo(projectId: number, todoId: number) {
     return this.http.patch<any>(
-      `${environment.apiUrl}/projects/${data.projectId}/todos/${data.todoId}`,
+      `${environment.apiUrl}/projects/${projectId}/todos/${todoId}`,
       null
     )
   }

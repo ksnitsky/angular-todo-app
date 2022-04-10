@@ -36,7 +36,7 @@ export class StateService {
   }
 
   changeTodoStatus(todo: any, projectId: number): void {
-    this.api.patchTodo({ todoId: todo.id, projectId })
+    this.api.patchTodo(projectId, todo.id)
       .subscribe({
         next: () => {
           todo.isCompleted = !todo.isCompleted

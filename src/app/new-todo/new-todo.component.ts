@@ -1,9 +1,9 @@
 import { StateService } from './../services/state.service';
-import { Component, Inject, OnInit } from '@angular/core';
-import { MatDialogRef, MAT_DIALOG_DATA } from '@angular/material/dialog';
+import { SnackBarService } from '../services/snack-bar.service';
+import { Component, OnInit } from '@angular/core';
+import { MatDialogRef } from '@angular/material/dialog';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
 import { map, Observable, startWith } from 'rxjs';
-import { SnackBarService } from '../services/snack-bar.service';
 
 @Component({
   selector: 'app-new-todo',
@@ -12,22 +12,22 @@ import { SnackBarService } from '../services/snack-bar.service';
 })
 export class NewTodoComponent implements OnInit {
 
-  newTodoForm!: FormGroup
+  private categories!: Array<string>
   filteredCategories!: Observable<string[]>
+  newTodoForm!: FormGroup
 
   constructor(
     public dialogRef: MatDialogRef<NewTodoComponent>,
     private state: StateService,
     private fb: FormBuilder,
-    private snackBar: SnackBarService,
-    @Inject(MAT_DIALOG_DATA) public data: { categories: string[] }
+    private _snackBar: SnackBarService
   ) { this.initForm() }
 
   sendData(): void {
     if (this.newTodoForm.valid) {
       this.state.addTodo(this.newTodoForm.value)
       this.dialogRef.close(
-        this.snackBar.displayMessage('Задача успешно создана.')
+        this._snackBar.displayMessage('Задача успешно создана.')
       )
     }
   }
@@ -38,6 +38,8 @@ export class NewTodoComponent implements OnInit {
         startWith(''),
         map(value => this._filter(value))
       )
+
+    this.categories = this.state.data.map(({ title }) => title)
   }
 
   private initForm(): void {
@@ -51,7 +53,7 @@ export class NewTodoComponent implements OnInit {
     const filterValue = value.toLowerCase()
 
     return (
-      this.data.categories.filter(
+      this.categories.filter(
         category => category.toLowerCase().includes(filterValue)
       )
     )
