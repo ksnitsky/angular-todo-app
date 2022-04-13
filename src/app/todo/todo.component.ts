@@ -1,4 +1,5 @@
-import { StateService } from './../services/state.service';
+import { Project } from '../models/project';
+import { StateService } from './../services/services';
 import { Component, Input } from '@angular/core';
 
 @Component({
@@ -8,7 +9,8 @@ import { Component, Input } from '@angular/core';
 })
 export class TodoComponent {
 
-  @Input('project') project: any
+  @Input('project')
+  project!: Project
 
   constructor(public state: StateService) { }
 }

@@ -1,49 +1,54 @@
-import { ApiService } from './api.service';
+import { Todo } from './../models/todo';
+import { map, Observable } from 'rxjs';
+import { ApiService } from './services';
 import { Injectable } from '@angular/core';
+import { Project } from '../models/project';
+import { plainToInstance } from 'class-transformer';
 
 @Injectable({
   providedIn: 'root'
 })
 export class StateService {
 
-  data: Array<any> = []
+  // data!: Observable<Project[]>
+  data!: Project[]
 
-  constructor(private api: ApiService) { this.fetchApi() }
+  constructor(private apiService: ApiService) { this.fetchApi() }
 
   fetchApi(): void {
-    this.api.getTodos()
+    this.apiService
+      .getTodos()
+      .pipe(
+        map(res => {
+          return plainToInstance(Project, res as Object[])
+        })
+      )
+      .subscribe(res => { this.data = res })
+  }
+
+  addTodo(newTodo: object): void {
+    this.apiService
+      .postTodo({ todo: { ...newTodo } })
       .subscribe({
         next: (res) => {
-          this.data = res
+          console.log(res);
+          const newTodo = plainToInstance(Project, res as Object)
+          console.log(newTodo);
+          
+          this.data
+            .find(({ id }) => id === newTodo.id)?.todos
+            .push(...newTodo.todos) ?? this.data.push(newTodo)
         },
-        error: () => {
-          console.error('Список задач не был получен.')
-        }
+        error: (err) => { console.error(err.message) }
       })
   }
 
-  addTodo(newTodo: any): void {
-    this.api.postTodo({ todo: { ...newTodo } })
+  changeTodoStatus(todo: Todo, projectId: number): void {
+    this.apiService
+      .patchTodo(projectId, todo.id)
       .subscribe({
-        next: (res) => {
-          this.data.find(({ id }) => id === res.id)?.todos
-            .push(...res.todos) ?? this.data.push(res)
-        },
-        error: (err) => {
-          console.error(err.message)
-        }
-      })
-  }
-
-  changeTodoStatus(todo: any, projectId: number): void {
-    this.api.patchTodo(projectId, todo.id)
-      .subscribe({
-        next: () => {
-          todo.isCompleted = !todo.isCompleted
-        },
-        error: (err) => {
-          console.error(err.message)
-        }
+        next: () => { todo.toggleStatus() },
+        error: (err) => { console.error(err.message) }
       })
   }
 }

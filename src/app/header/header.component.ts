@@ -8,7 +8,7 @@ import { Component, Output, EventEmitter } from '@angular/core';
 export class HeaderComponent {
 
   @Output()
-  handleClick: EventEmitter<any> = new EventEmitter<any>()
+  handleClick: EventEmitter<void> = new EventEmitter<void>()
 
   constructor() { }
 }

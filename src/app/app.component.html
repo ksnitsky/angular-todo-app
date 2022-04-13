@@ -3,7 +3,8 @@
   </app-header>
 
   <main>
-    <app-todo *ngFor="let project of state.data" [project]="project">
+    <app-todo *ngFor="let project of state.data; trackBy: trackByFn"
+              [project]="project">
     </app-todo>
   </main>
 </div>

@@ -12,8 +12,8 @@
         checkboxPosition="before"
         *ngFor="let todo of project.todos"
         (click)="state.changeTodoStatus(todo, project.id)"
-        [selected]="todo.isCompleted"
         [style]="todo.isCompleted ? 'text-decoration: line-through' : ''"
+        [selected]="todo.isCompleted"
       >
       {{ todo.text }}
       </mat-list-option>
