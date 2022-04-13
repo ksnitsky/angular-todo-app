@@ -1,27 +1,34 @@
-# Frontend
+# Frontend part of TODO Angular app
 
-This project was generated with [Angular CLI](https://github.com/angular/angular-cli) version 13.3.1.
+## Overview
 
-## Development server
+This is the frontend part of the TODO application in Angular
 
-Run `ng serve` for a dev server. Navigate to `http://localhost:4200/`. The application will automatically reload if you change any of the source files.
+The backend part is made using Rails and can be found [in this repository](https://github.com/ksnitsky/Rails-TODO-api)
 
-## Code scaffolding
+## The main goal
 
-Run `ng generate component component-name` to generate a new component. You can also use `ng generate directive|pipe|service|class|guard|interface|enum|module`.
+The application must include:
+- Display task lists by category
+- Ability to create a new task
+- Task status switching
 
-## Build
+Also:
+- Using the latest version of Angular to implement the framework and application logic
+- Angular Material UI for layout
+- Task creation form using Reactive forms
+- Working with classes using class-transformer 
 
-Run `ng build` to build the project. The build artifacts will be stored in the `dist/` directory.
 
-## Running unit tests
+### Screenshot
 
-Run `ng test` to execute the unit tests via [Karma](https://karma-runner.github.io).
+![](./screenshot.png)
 
-## Running end-to-end tests
+## Built with
 
-Run `ng e2e` to execute the end-to-end tests via a platform of your choice. To use this command, you need to first add a package that implements end-to-end testing capabilities.
-
-## Further help
-
-To get more help on the Angular CLI use `ng help` or go check out the [Angular CLI Overview and Command Reference](https://angular.io/cli) page.
+- [Angular 13.3.1](https://angular.io/)
+- [Angular Material UI](https://material.angular.io/)
+- [Express JS](https://expressjs.com/) for Heroku deployment
+- [Class-Transformer](https://github.com/typestack/class-transformer)
+- [My API](https://github.com/ksnitsky/Rails-TODO-api)
+- [Reactive Forms](https://angular.io/guide/reactive-forms)

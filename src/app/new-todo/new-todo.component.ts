@@ -1,5 +1,4 @@
-import { StateService } from './../services/state.service';
-import { SnackBarService } from '../services/snack-bar.service';
+import { StateService, SnackBarService } from './../services/services'
 import { Component, OnInit } from '@angular/core';
 import { MatDialogRef } from '@angular/material/dialog';
 import { FormGroup, FormBuilder, Validators } from '@angular/forms';
@@ -12,12 +11,12 @@ import { map, Observable, startWith } from 'rxjs';
 })
 export class NewTodoComponent implements OnInit {
 
-  private categories!: Array<string>
+  private categories!: string[]
   filteredCategories!: Observable<string[]>
   newTodoForm!: FormGroup
 
   constructor(
-    public dialogRef: MatDialogRef<NewTodoComponent>,
+    private dialogRef: MatDialogRef<NewTodoComponent>,
     private state: StateService,
     private fb: FormBuilder,
     private _snackBar: SnackBarService
@@ -34,7 +33,8 @@ export class NewTodoComponent implements OnInit {
 
   ngOnInit(): void {
     this.filteredCategories = this.newTodoForm.controls['project_title']
-      .valueChanges.pipe(
+      .valueChanges
+      .pipe(
         startWith(''),
         map(value => this._filter(value))
       )

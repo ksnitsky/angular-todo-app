@@ -1,4 +1,5 @@
-import { StateService } from './services/state.service';
+import { Project } from './models/project';
+import { StateService } from './services/services';
 import { Component } from '@angular/core';
 import { MatDialog } from '@angular/material/dialog';
 import { NewTodoComponent } from './new-todo/new-todo.component';
@@ -17,5 +18,9 @@ export class AppComponent {
 
   openDialog(): void {
     this.dialog.open(NewTodoComponent, { width: '375px' })
+  }
+
+  trackByFn(_index: number, item: Project): number {
+    return item.id
   }
 }
