@@ -31,10 +31,8 @@ export class StateService {
       .postTodo({ todo: { ...newTodo } })
       .subscribe({
         next: (res) => {
-          console.log(res);
           const newTodo = plainToInstance(Project, res as Object)
-          console.log(newTodo);
-          
+
           this.data
             .find(({ id }) => id === newTodo.id)?.todos
             .push(...newTodo.todos) ?? this.data.push(newTodo)
